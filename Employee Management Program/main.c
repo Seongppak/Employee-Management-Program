@@ -1,3 +1,4 @@
+
 #define N 12
 #include <stdio.h>
 #include<time.h>
@@ -16,9 +17,9 @@ struct date
 	int day;
 };
 
-int all_member(struct member human[], struct date birthdays[]);
-void this_month_birth(struct member human[], struct date birthdays[]);
-void search_how_old(struct member human[], struct date birthdays[]);
+int all_member(struct member human[], struct date birthdays[]); //전체 호출
+void this_month_birth(struct member human[], struct date birthdays[]); // 생일자 조회
+void search_how_old(struct member human[], struct date birthdays[]); // 나이 검색 
 
 int main()
 {
@@ -28,6 +29,7 @@ int main()
 		{1001,"김민수", "010-2345-6781"}, {1002, "이지은","010-3456-7892"},{1003,"박준호","010-4567-8903"}, {1004,"최서연", "010-5678-9014"},
 		{1005,"정현우","010-6789-0125"},{1006,"강수빈","010-7890-1236"}, {1007, "조성민", "010-8901-2347"}, {1008, "윤하늘", "010-9012-3458"},
 		{1009,"장도윤","010-1234-5679"}, {1010, "임지수", "010-2345-6780"}, {1011, "한유진", "010-3456-7891"}, {1012,"오태양", "010-4567-8902"}
+		
 	};
 
 	struct date birthdays[N] = // 회사원들 생일
@@ -113,7 +115,7 @@ void search_how_old(struct member human[], struct date birthdays[]) // 2. 나이 �
 		{
 			int year = (*today).tm_year + 1900;
 			int birth_year = birthdays[i].year;
-			int old = year - birth_year;
+			int old = year - birth_year + 1;
 			printf("================================================================\n");
 			printf("%s님의 나이는 %d세 입니다.(%d년 기준)\n", human[i].name, old,today->tm_year + 1900);
 			printf("================================================================\n");
