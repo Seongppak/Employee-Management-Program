@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Employee Management Program/Employee Management Program.vcxproj" />
+  <Project Path="Employee Management Program/Employee Management Program.vcxproj" Id="17c00119-342e-4b51-bbf7-37790145b1da" />
 </Solution>

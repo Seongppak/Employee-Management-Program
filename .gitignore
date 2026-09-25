@@ -53,3 +53,53 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Visual Studio 캐시 및 임시 파일
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.db-shm
+*.VC.db-wal
+*.VC.opendb
+*.VC.opendb-shm
+*.VC.opendb-wal
+*.opendb
+*.ipch
+*.tlog
+*.lastbuildstate
+
+# 컴파일 및 빌드 결과물
+Debug/
+Release/
+x64/
+x86/
+bin/
+obj/
+[Bb]uild/
+
+# C/C++ 빌드 파일
+*.obj
+*.o
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.idb
+*.pch
+*.ipch
+*.iobj
+*.ipch
+*.ipdb
+*.log
+
+# Visual Studio 자동 생성 파일
+Generated\ Files/
+*.VC.db
+*.VC.opendb
+*.VC.db-shm
+*.VC.db-wal
+*.VC.opendb-shm
+*.VC.opendb-wal
