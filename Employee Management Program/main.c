@@ -1,14 +1,3 @@
-/*
-각 직원에 대해 사번, 이름 ,전화번호, 생일(년/월/일)을 관리
-직원 데이터는 사용자로부터 직접 읽어들인다.
-초기화 불가
-프로그램 실행시 해당월에 생일인 사람을 출력한다.
- 이름과 생일 날자(일)
-검색 기능을 제공
- 사번으로 검색. 이때 날자 대신 나이를 출력한다.
- 최소 10명을 처리하도록 구현
-*/
-
 #define N 12
 #include <stdio.h>
 #include<time.h>
@@ -27,8 +16,9 @@ struct date
 	int day;
 };
 
-void all_member(struct member human[], struct date birthdays[]);
+int all_member(struct member human[], struct date birthdays[]);
 void this_month_birth(struct member human[], struct date birthdays[]);
+void search_how_old(struct member human[], struct date birthdays[]);
 
 int main()
 {
@@ -46,28 +36,34 @@ int main()
 		{1997,1, 9}, {2003,9,30}, {1996,12,5}, {2000,9,18}, {1994,5,14},{2004,2,29}
 	};
 
-
-	int choice;
-	printf("1. 금월 생일자 조회, 2. 나이 검색 3. 전체 사원 출력 0. 종료\n원하는 기능의 번호를 입력하십시오.:");
-	scanf_s("%d", &choice);
-	switch (choice)
-	{
-	case 1:
-	{
-		this_month_birth(human, birthdays);
-		break;
-	}
-	//case 2: // 나이 검색
-	case 3: {
-		all_member(human, birthdays); // 배열은 기본적으로 주소를 전달하기 때문에 &를 붙이지 않아도 주소 전달이 된다.
-		break;
-			};
-	case 0: {
-		printf("프로그램이 종료됩니다.");
+	while (1) {
+		int choice;
+		printf("1. 금월 생일자 조회, 2. 나이 검색 3. 전체 사원 출력 0. 종료\n원하는 기능의 번호를 입력하십시오.:");
+		scanf_s("%d", &choice);
+		switch (choice)
+		{
+		case 1:
+		{
+			this_month_birth(human, birthdays);
+			break;
+		}
+		case 2: // 나이 검색
+		{
+			search_how_old(human, birthdays);
+			break;
+		}
+		case 3: {
+			all_member(human, birthdays); // 배열은 기본적으로 주소를 전달하기 때문에 &를 붙이지 않아도 주소 전달이 된다.
+			break;
+		};
+		case 0: {
+			printf("================================================================\n");
+			printf("프로그램이 종료됩니다.\n");
+			printf("================================================================\n");
 			return 0;
-			}
+		}
+		}
 	}
-
 	
 	return 0;
 }
@@ -85,14 +81,14 @@ void this_month_birth(struct member human[], struct date birthdays[]) //1. 금월 
 	{
 		if (month == birthdays[i].month)
 		{
-			found[count] = i;
+			found[count] = i; // 배열에 i 즉, 구조체의 위치? 를 집어넣어서 출력할 수 있도록 만듦
 			count++;
 		}
 	}
 	printf("======================== 금월 생일자들  ========================\n");
 	for (int i = 0; i < count; i++)
 	{
-		int index = found[i];
+		int index = found[i]; // 위에서 저장된 위치 출력
 		printf("사번 = %d, 이름 = %s, 전화번호 = %s\n", human[index].number, human[index].name, human[index].phone_number);
 		printf("생년월일: 연도 = %d, 월 = %d, 일 = %d\n\n", birthdays[index].year, birthdays[index].month, birthdays[index].day);
 		printf("총원 = %d명\n", count);
@@ -101,10 +97,35 @@ void this_month_birth(struct member human[], struct date birthdays[]) //1. 금월 
 }
 
 
+void search_how_old(struct member human[], struct date birthdays[]) // 2. 나이 검색  , 나이 = 현재 년도 -  출생 년도 + 1
+{
+	int num;
+	printf("검색할 인원의 사번을 입력하십시오:");
+	scanf_s("%d", &num);
+	time_t now = time(NULL);
+	struct tm* today = localtime(&now);
+	int found = 0;
+	for (int i = 0; i < N; i++)
+	{
+		if (num == human[i].number)
+		{
+			int year = (*today).tm_year + 1900;
+			int birth_year = birthdays[i].year;
+			int old = year - birth_year;
+			printf("================================================================\n");
+			printf("%s님의 나이는 %d세 입니다.(%d년 기준)\n", human[i].name, old,today->tm_year + 1900);
+			printf("================================================================\n");
+			found = 1;
+			break;
+		}
+		
+	}
+	if (found == 0)
+		printf("사원이 검색되지 않습니다.");
+}
 
 
-
-void all_member(struct member human[], struct date birthdays[]) // 3. 사원 전체 출력 
+int all_member(struct member human[], struct date birthdays[]) // 3. 사원 전체 출력 
 {
 	printf("======================== 현재 사내 사원 ========================\n");
 	for (int i = 0; i < N; i++)
@@ -115,7 +136,4 @@ void all_member(struct member human[], struct date birthdays[]) // 3. 사원 전체 
 	printf("================================================================\n");
 	return 0;
 }
-//프로그램 실행 시 몇월인지에 따라 그 생일인 사람을 출력한다.
  
-
-// 사번으로 검색하여 이때 나이를 출력한다 --> 현재 프로그램 작동중인 컴퓨터의 연도 정보를 받아와서 현재연도 - 출생연도 하면 될듯
