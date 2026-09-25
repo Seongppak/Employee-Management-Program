@@ -38,7 +38,8 @@ int main()
 
 	while (1) {
 		int choice;
-		printf("1. 금월 생일자 조회, 2. 나이 검색 3. 전체 사원 출력 0. 종료\n원하는 기능의 번호를 입력하십시오.:");
+		printf("===== 기능 목록 =====\n");
+		printf("1. 금월 생일자 조회\n2. 나이 검색\n3. 전체 사원 출력\n0. 종료\n원하는 기능의 번호를 입력하십시오.:");
 		scanf_s("%d", &choice);
 		switch (choice)
 		{
@@ -85,14 +86,15 @@ void this_month_birth(struct member human[], struct date birthdays[]) //1. 금월 
 			count++;
 		}
 	}
-	printf("======================== 금월 생일자들  ========================\n");
+	printf("======================== %d월 생일자들  ========================\n",today->tm_mon + 1);
 	for (int i = 0; i < count; i++)
 	{
 		int index = found[i]; // 위에서 저장된 위치 출력
 		printf("사번 = %d, 이름 = %s, 전화번호 = %s\n", human[index].number, human[index].name, human[index].phone_number);
 		printf("생년월일: 연도 = %d, 월 = %d, 일 = %d\n\n", birthdays[index].year, birthdays[index].month, birthdays[index].day);
-		printf("총원 = %d명\n", count);
+		
 	}
+	printf("총원 = %d\n", count);
 	printf("================================================================\n");
 }
 
@@ -131,7 +133,7 @@ int all_member(struct member human[], struct date birthdays[]) // 3. 사원 전체 �
 	for (int i = 0; i < N; i++)
 	{
 		printf("사번 = %d, 이름 = %s, 전화번호 = %s\n", human[i].number, human[i].name, human[i].phone_number);
-		printf("년 = %d, 월 = %d, 일 = %d\n\n", birthdays[i].year, birthdays[i].month, birthdays[i].day);
+		printf("생년월일: 연도 = %d, 월 = %d, 일 = %d\n\n", birthdays[i].year, birthdays[i].month, birthdays[i].day);
 	}
 	printf("================================================================\n");
 	return 0;
