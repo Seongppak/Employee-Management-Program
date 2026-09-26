@@ -38,6 +38,8 @@ int main()
 		{1997,1, 9}, {2003,9,30}, {1996,12,5}, {2000,9,18}, {1994,5,14},{2004,2,29}
 	};
 
+	this_month_birth(human, birthdays);
+
 	while (1) {
 		int choice;
 		printf("===== 기능 목록 =====\n");
@@ -92,9 +94,10 @@ void this_month_birth(struct member human[], struct date birthdays[]) //1. 금월 
 	for (int i = 0; i < count; i++)
 	{
 		int index = found[i]; // 위에서 저장된 위치 출력
-		printf("사번 = %d, 이름 = %s, 전화번호 = %s\n", human[index].number, human[index].name, human[index].phone_number);
-		printf("생년월일: 연도 = %d, 월 = %d, 일 = %d\n\n", birthdays[index].year, birthdays[index].month, birthdays[index].day);
-		
+		printf("================================================================\n");
+		printf("사번 = %d\n이름 = %s\n전화번호 = %s\n", human[index].number, human[index].name, human[index].phone_number);
+		printf("생년월일:\n연도 = %d\n월 = %d\n일 = %d\n\n", birthdays[index].year, birthdays[index].month, birthdays[index].day);
+		printf("================================================================\n");
 	}
 	printf("총원 = %d\n", count);
 	printf("================================================================\n");
