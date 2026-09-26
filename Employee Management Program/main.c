@@ -134,13 +134,19 @@ void search_how_old(struct member human[], struct date birthdays[]) // 2. 나이 �
 
 int all_member(struct member human[], struct date birthdays[]) // 3. 사원 전체 출력 
 {
-	printf("======================== 현재 사내 사원 ========================\n");
+	printf("========================== 전체 사원 ===========================\n");
+	int count = 0;
 	for (int i = 0; i < N; i++)
-	{
-		printf("사번 = %d, 이름 = %s, 전화번호 = %s\n", human[i].number, human[i].name, human[i].phone_number);
-		printf("생년월일: 연도 = %d, 월 = %d, 일 = %d\n\n", birthdays[i].year, birthdays[i].month, birthdays[i].day);
+	{	
+		printf("================================================================\n");
+		printf("사번 = %d\n이름 = %s\n전화번호 = %s\n", human[i].number, human[i].name, human[i].phone_number);
+		printf("생년월일:\n연도 = %d\n월 = %d\n일 = %d\n\n", birthdays[i].year, birthdays[i].month, birthdays[i].day);
+		printf("================================================================\n");
+		count++;
 	}
+	printf("총원 = %d\n", count);
 	printf("================================================================\n");
+	
 	return 0;
 }
  
